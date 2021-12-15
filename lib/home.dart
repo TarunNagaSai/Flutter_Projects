@@ -54,12 +54,12 @@ class _HomePageState extends State<HomePage> {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text('$name is added to cart')),
                   );
-                  
+
                   //send item num to cart_product
                   cartProduct.setItemNum(itemNum!);
                 },
                 child: const Text(
-                  'Cart',
+                  'add to Cart',
                   style: TextStyle(
                     color: Colors.white,
                   ),

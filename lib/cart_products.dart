@@ -1,7 +1,7 @@
 import 'dart:io';
 
 class CartProduct {
-  final List<int> _productNum = [1,3,5,7,8];
+  final List<int> _productNum = [14,3,5,7,8];
 
   setItemNum(int productNum) {
     _productNum.add(productNum);

@@ -18,7 +18,7 @@ class _CartListState extends State<CartList> {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     String? productName = preferences.getString('$productImage');
     stdout.write('productName:$productName');
-    return productName??'';
+    return productName ?? '';
   }
 
   // Future<Widget> isCartEmpty()  async{
@@ -57,17 +57,17 @@ class _CartListState extends State<CartList> {
         ),
       );
 
-  ListView cartProductList(){
+  ListView cartProductList() {
     return ListView.builder(
       padding: const EdgeInsets.all(8.0),
       itemCount: productList.length,
       itemBuilder: (BuildContext context, int index) {
-        stdout.write(index);
-        List<int> content = [];
-        content.add(1);
+        int content = 1;
+        // List<int> content = [];
+        // content.add(1);
         int cartProductImage = cartProduct.getItemNum(index);
-        String cartProductName = getProductName(cartProductImage) as String;
-        stdout.write(cartProductName);
+        Future<String> cartProductName = getProductName(cartProductImage);
+        // stdout.write(cartProductName);
         return Card(
           child: Row(
             children: [
@@ -82,7 +82,7 @@ class _CartListState extends State<CartList> {
                 child: Column(
                   children: [
                     Text(
-                      cartProductName,
+                      '$cartProductName',
                       style: const TextStyle(
                         fontSize: 22.0,
                       ),
@@ -105,11 +105,11 @@ class _CartListState extends State<CartList> {
                                 ),
                                 onPressed: () {
                                   setState(() {
-                                    content[index]--;
+                                    content--;
                                   });
                                 },
                               ),
-                              Text('$context[index]'),
+                              Text('$content'),
                               IconButton(
                                 icon: const Icon(
                                   Icons.add_circle,
@@ -117,7 +117,7 @@ class _CartListState extends State<CartList> {
                                 ),
                                 onPressed: () {
                                   setState(() {
-                                    content[index]++;
+                                    content++;
                                   });
                                 },
                               ),
