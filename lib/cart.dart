@@ -14,11 +14,11 @@ class CartList extends StatefulWidget {
 class _CartListState extends State<CartList> {
   List productList = cartProduct.sendProduct();
 
-  Future<String?> getProductName(int productImage) async {
+  Future<String> getProductName(int productImage) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    String? productNum = preferences.getString('$productImage');
-    stdout.write('productNum:$productNum');
-    return productNum;
+    String? productName = preferences.getString('$productImage');
+    stdout.write('productName:$productName');
+    return productName??'';
   }
 
   // Future<Widget> isCartEmpty()  async{
@@ -36,7 +36,7 @@ class _CartListState extends State<CartList> {
       body: cartProductList(),
       bottomNavigationBar: TextButton(
         onPressed: () {
-          // stdout.write(productList);
+          stdout.write(productList);
         },
         child: const Text(
           'Check Out',
@@ -57,13 +57,14 @@ class _CartListState extends State<CartList> {
         ),
       );
 
-  ListView cartProductList() {
+  ListView cartProductList(){
     return ListView.builder(
       padding: const EdgeInsets.all(8.0),
       itemCount: productList.length,
       itemBuilder: (BuildContext context, int index) {
+        stdout.write(index);
         List<int> content = [];
-        content[index] = 0;
+        content.add(1);
         int cartProductImage = cartProduct.getItemNum(index);
         String cartProductName = getProductName(cartProductImage) as String;
         stdout.write(cartProductName);
