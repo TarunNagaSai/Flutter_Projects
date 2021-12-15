@@ -20,11 +20,11 @@ class _CartListState extends State<CartList> {
     return productNum;
   }
 
-  Future<Function> isCartEmpty()  async{
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    bool status = preferences.getBool('isCartEmpty') ?? false;
-    return status ? emptyCart: cartProductList;
-  }
+  // Future<Widget> isCartEmpty()  async{
+  //   SharedPreferences preferences = await SharedPreferences.getInstance();
+  //   bool status = preferences.getBool('isCartEmpty') ?? false;
+  //   return status ? emptyCart: cartProductList;
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class _CartListState extends State<CartList> {
       appBar: AppBar(
         title: const Text('Cart Screen'),
       ),
-      body: isCartEmpty() as Widget,
+      body: cartProductList(),
       bottomNavigationBar: TextButton(
         onPressed: () {},
         child: const Text(
@@ -48,9 +48,9 @@ class _CartListState extends State<CartList> {
     );
   }
 
-  Center emptyCart() => const Center(child: Text('Cart is empty.',),);
+  Widget emptyCart() => const Center(child: Text('Cart is empty.',),);
 
-  Widget cartProductList() {
+  ListView cartProductList() {
     return ListView.builder(
       padding: const EdgeInsets.all(8.0),
       itemCount: productList.length,
