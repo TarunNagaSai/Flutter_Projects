@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shopping/cart_products.dart';
-// import 'dart:io';
+import 'dart:io';
 import 'package:shared_preferences/shared_preferences.dart';
 
 CartProduct cartProduct = CartProduct();
@@ -17,6 +17,7 @@ class _CartListState extends State<CartList> {
   Future<String?> getProductName(int productImage) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     String? productNum = preferences.getString('$productImage');
+    stdout.write('productNum:$productNum');
     return productNum;
   }
 
@@ -34,7 +35,9 @@ class _CartListState extends State<CartList> {
       ),
       body: cartProductList(),
       bottomNavigationBar: TextButton(
-        onPressed: () {},
+        onPressed: () {
+          // stdout.write(productList);
+        },
         child: const Text(
           'Check Out',
           style: TextStyle(
@@ -48,7 +51,11 @@ class _CartListState extends State<CartList> {
     );
   }
 
-  Widget emptyCart() => const Center(child: Text('Cart is empty.',),);
+  Widget emptyCart() => const Center(
+        child: Text(
+          'Cart is empty.',
+        ),
+      );
 
   ListView cartProductList() {
     return ListView.builder(
@@ -59,6 +66,7 @@ class _CartListState extends State<CartList> {
         content[index] = 0;
         int cartProductImage = cartProduct.getItemNum(index);
         String cartProductName = getProductName(cartProductImage) as String;
+        stdout.write(cartProductName);
         return Card(
           child: Row(
             children: [

@@ -1,8 +1,11 @@
+import 'dart:io';
+
 class CartProduct {
-  final List<int> _productNum = [];
+  late List<int> _productNum = [];
 
   setItemNum(int productNum) {
     _productNum.add(productNum);
+    stdout.write(_productNum);
   }
 
   int getItemNum(int index) {
@@ -10,6 +13,7 @@ class CartProduct {
   }
 
   List sendProduct() {
+    stdout.write(_productNum);
     return _productNum;
   }
 }
