@@ -23,7 +23,7 @@ class _CartListState extends State<CartList> {
   Future<Function> isCartEmpty()  async{
     SharedPreferences preferences = await SharedPreferences.getInstance();
     bool status = preferences.getBool('isCartEmpty') ?? false;
-    return status ? cartProductList : emptyCart;
+    return status ? emptyCart: cartProductList;
   }
 
   @override
