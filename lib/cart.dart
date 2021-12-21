@@ -13,6 +13,7 @@ class CartList extends StatefulWidget {
 }
 
 class _CartListState extends State<CartList> {
+  
   Future<String> getProductName(int productImage) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     String? productName = preferences.getString('$productImage');
@@ -20,11 +21,7 @@ class _CartListState extends State<CartList> {
     return productName.toString();
   }
 
-  // Future<Widget> isCartEmpty()  async{
-  //   SharedPreferences preferences = await SharedPreferences.getInstance();
-  //   bool status = preferences.getBool('isCartEmpty') ?? false;
-  //   return status ? emptyCart: cartProductList;
-  // }
+ 
 
   @override
   Widget build(BuildContext context) {    return Scaffold(
@@ -47,101 +44,106 @@ class _CartListState extends State<CartList> {
     );
   }
 
-  Widget emptyCart() => const Center(
-        child: Text(
-          'Cart is empty.',
-        ),
-      );
+   
 
-  ListView cartProductList() {
-    return ListView.builder(
-      padding: const EdgeInsets.all(8.0),
-      itemCount: widget.productData.length,
-      itemBuilder: (BuildContext context, int index) {
-        // int content = 1;
-        // // List<int> content = [];
-        // // content.add(1);
-        int cartProductImage = widget.productData[index];
-        String cartProductName = getProductName(cartProductImage).toString();
-        // stdout.write(cartProductName);
-        return Card(
-          child: Row(
-            children: [
-              Expanded(
-                flex: 1,
-                child: Image(
-                  image: AssetImage('images/$cartProductImage.jpg'),
-                ),
-              ),
-              Expanded(
-                flex: 9,
-                child: Column(
-                  children: [
-                    Text(
-                      cartProductName,
-                      style: const TextStyle(
-                        fontSize: 22.0,
-                      ),
-                    ),
-                    const Text(
-                      'This is a dog food Product',
-                      style: TextStyle(
-                        fontSize: 18.0,
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Row(
-                            children: [
-                              IconButton(
-                                icon: const Icon(
-                                  Icons.do_disturb_on,
-                                  size: 20.0,
-                                ),
-                                onPressed: () {
-                                  setState(() {
-                                    // --content;
-                                    // stdout.writeln(content[index]);
-                                  });
-                                },
-                              ),
-                              const Text(
-                                '1',
-                              ),
-                              IconButton(
-                                icon: const Icon(
-                                  Icons.add_circle,
-                                  size: 20.0,
-                                ),
-                                onPressed: () {
-                                  setState(() {
-                                    // ++content;
-                                    // stdout.write(content[index]);
-                                  });
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
-                        Expanded(
-                          child: IconButton(
-                            icon: const Icon(
-                              Icons.delete_rounded,
-                              size: 20.0,
-                            ),
-                            onPressed: () {},
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ],
+  Widget cartProductList() {
+    if(widget.productData.isEmpty){
+        return const Center(
+          child: Text(
+            'Cart is empty.',
           ),
         );
-      },
-    );
+    }else{
+      return ListView.builder(
+        padding: const EdgeInsets.all(8.0),
+        itemCount: widget.productData.length,
+        itemBuilder: (BuildContext context, int index) {
+          // int content = 1;
+          // // List<int> content = [];
+          // // content.add(1);
+          int cartProductImage = widget.productData[index];
+          String cartProductName = getProductName(cartProductImage).toString();
+          // stdout.write(cartProductName);
+          return Card(
+            child: Row(
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: Image(
+                    image: AssetImage('images/$cartProductImage.jpg'),
+                  ),
+                ),
+                Expanded(
+                  flex: 9,
+                  child: Column(
+                    children: [
+                      Text(
+                        cartProductName,
+                        style: const TextStyle(
+                          fontSize: 22.0,
+                        ),
+                      ),
+                      const Text(
+                        'This is a dog food Product',
+                        style: TextStyle(
+                          fontSize: 18.0,
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Row(
+                              children: [
+                                IconButton(
+                                  icon: const Icon(
+                                    Icons.do_disturb_on,
+                                    size: 20.0,
+                                  ),
+                                  onPressed: () {
+                                    // setState(() {
+                                    //   // --content;
+                                    //   // stdout.writeln(content[index]);
+                                    // });
+                                  },
+                                ),
+                                const Text(
+                                  '1',
+                                ),
+                                IconButton(
+                                  icon: const Icon(
+                                    Icons.add_circle,
+                                    size: 20.0,
+                                  ),
+                                  onPressed: () {
+                                    // setState(() {
+                                    //   // ++content;
+                                    //   // stdout.write(content[index]);
+                                    // });
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            child: IconButton(
+                              icon: const Icon(
+                                Icons.delete_rounded,
+                                size: 20.0,
+                              ),
+                              onPressed: () {},
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      );
+    
+    }
   }
 }
