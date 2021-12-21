@@ -45,7 +45,6 @@ class _HomePageState extends State<HomePage> {
                   //Push data to cart using Shared_Preferences
                   SharedPreferences preferences =
                       await SharedPreferences.getInstance();
-                  preferences.setBool("isCartEmpty", true);
                   preferences.setString('$itemNum', name!);
 
                   //SnackBar
