@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:shopping/cart_products.dart';
 import 'dart:io';
 import 'package:shared_preferences/shared_preferences.dart';
 
-CartProduct cartProduct = CartProduct();
-
+// ignore: must_be_immutable
 class CartList extends StatefulWidget {
-  const CartList({Key? key}) : super(key: key);
+  const CartList({Key? key, required this.productData}) : super(key: key);
+  final List<int> productData;
+
+  // List<int> data = productData;
   @override
   _CartListState createState() => _CartListState();
 }
 
 class _CartListState extends State<CartList> {
-  List productList = cartProduct.sendProduct();
-
   Future<String> getProductName(int productImage) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     String? productName = preferences.getString('$productImage');
@@ -28,16 +27,13 @@ class _CartListState extends State<CartList> {
   // }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
+  Widget build(BuildContext context) {    return Scaffold(
       appBar: AppBar(
         title: const Text('Cart Screen'),
       ),
       body: cartProductList(),
       bottomNavigationBar: TextButton(
-        onPressed: () {
-          stdout.write(productList);
-        },
+        onPressed: () {},
         child: const Text(
           'Check Out',
           style: TextStyle(
@@ -60,14 +56,12 @@ class _CartListState extends State<CartList> {
   ListView cartProductList() {
     return ListView.builder(
       padding: const EdgeInsets.all(8.0),
-      itemCount: productList.length,
+      itemCount: widget.productData.length,
       itemBuilder: (BuildContext context, int index) {
         // int content = 1;
-        List<int> content = [];
-        if (content.length < productList.length) {
-          content.add(1);
-        }
-        int cartProductImage = cartProduct.getItemNum(index);
+        // // List<int> content = [];
+        // // content.add(1);
+        int cartProductImage = widget.productData[index];
         String cartProductName = getProductName(cartProductImage).toString();
         // stdout.write(cartProductName);
         return Card(
@@ -107,12 +101,14 @@ class _CartListState extends State<CartList> {
                                 ),
                                 onPressed: () {
                                   setState(() {
-                                    content[index]--;
-                                    stdout.write(content[index]);
+                                    // --content;
+                                    // stdout.writeln(content[index]);
                                   });
                                 },
                               ),
-                              Text('data'),
+                              const Text(
+                                '1',
+                              ),
                               IconButton(
                                 icon: const Icon(
                                   Icons.add_circle,
@@ -120,8 +116,8 @@ class _CartListState extends State<CartList> {
                                 ),
                                 onPressed: () {
                                   setState(() {
-                                    content[index]++;
-                                    stdout.write(content[index]);
+                                    // ++content;
+                                    // stdout.write(content[index]);
                                   });
                                 },
                               ),

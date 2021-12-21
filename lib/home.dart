@@ -1,10 +1,7 @@
 // import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:shopping/cart.dart';
-import 'package:shopping/cart_products.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-CartProduct cartProduct = CartProduct();
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -14,6 +11,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<int> data = [];
 // Items card
   Card items({int? itemNum, String? name, double? price}) {
     // stdout.write('$itemNum,$name,$price');
@@ -55,8 +53,8 @@ class _HomePageState extends State<HomePage> {
                     SnackBar(content: Text('$name is added to cart')),
                   );
 
-                  //send item num to cart_product
-                  cartProduct.setItemNum(itemNum!);
+                  //send item num to data list
+                  data.add(itemNum!);
                 },
                 child: const Text(
                   'add to Cart',
@@ -90,7 +88,7 @@ class _HomePageState extends State<HomePage> {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) {
-                  return const CartList();
+                  return CartList(productData: data,);
                 }),
               );
             },
