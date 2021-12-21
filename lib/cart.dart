@@ -21,10 +21,10 @@ class _CartListState extends State<CartList> {
     return productName.toString();
   }
 
- 
-
   @override
-  Widget build(BuildContext context) {    return Scaffold(
+  Widget build(BuildContext context) {    
+    return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text('Cart Screen'),
       ),
@@ -44,14 +44,20 @@ class _CartListState extends State<CartList> {
     );
   }
 
-   
-
   Widget cartProductList() {
     if(widget.productData.isEmpty){
-        return const Center(
-          child: Text(
-            'Cart is empty.',
-          ),
+        return Center(
+          child: Column(
+            children: const [
+              Image(
+                image: AssetImage('images/empty5.png'),
+                height: 500.0,
+                width: 500.0,
+              ),
+              SizedBox(height: 10,),
+              Text('Cart is Empty'),
+            ],
+          ) 
         );
     }else{
       return ListView.builder(
