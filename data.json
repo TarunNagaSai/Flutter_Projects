@@ -1,0 +1,77 @@
+{
+    {
+        "itemNum":0,
+        "itemName": "Purepet",
+        "itemPrice": 200.20
+    },
+    {
+        "itemNum":1,
+        "itemName": "Pedigree",
+        "itemPrice": 550.20
+    },
+    {
+        "itemNum":2,
+        "itemName": "Drools",
+        "itemPrice":  80.40
+    },
+    {
+        "itemNum":3,
+        "itemName": "Drools",
+        "itemPrice": 402.20
+    },
+    {
+        "itemNum":4,
+        "itemName": "Supercoat",
+        "itemPrice": 333.00
+    },
+    {
+        "itemNum":5,
+        "itemName": "Iams",
+        "itemPrice": 100.20
+    },
+    {
+        "itemNum":6,
+        "itemName": "Royal Canin",
+        "itemPrice": 200.20
+    },
+    {
+        "itemNum":7,
+        "itemName": "Chappi",
+        "itemPrice": 700.70
+    },
+    {
+        "itemNum":8,
+        "itemName": "Meetup",
+        "itemPrice": 345.60
+    },
+    {
+        "itemNum":9,
+        "itemName": "Drools",
+        "itemPrice": 235.80
+    },
+    {
+        "itemNum":10,
+        "itemName": "Meetup",
+        "itemPrice": 244.40
+    },
+    {
+        "itemNum":11,
+        "itemName": "Pedigree",
+        "itemPrice": 734.20
+    },
+    {
+        "itemNum":12,
+        "itemName": "N&D",
+        "itemPrice": 256.70
+    },
+    {
+        "itemNum":13,
+        "itemName": "Pedigree",
+        "itemPrice": 753.40
+    },
+    {
+        "itemNum":14,
+        "itemName": "Meetup",
+        "itemPrice": 634.60
+    }
+}
