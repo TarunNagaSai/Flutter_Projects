@@ -55,7 +55,7 @@ class _CartListState extends State<CartList> {
         child: Column(
           children: const [
             Image(
-              image: AssetImage('images/empty5.png'),
+              image: AssetImage('assets/empty5.png'),
               height: 500.0,
               width: 500.0,
             ),
@@ -83,7 +83,7 @@ class _CartListState extends State<CartList> {
                 Expanded(
                   flex: 1,
                   child: Image(
-                    image: AssetImage('images/$cartProductImage.jpg'),
+                    image: AssetImage('assets/$cartProductImage.jpg'),
                   ),
                 ),
                 Expanded(

@@ -2,13 +2,10 @@
 import 'package:flutter/material.dart';
 import 'package:shopping/cart.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'product_data.dart';
 import 'dart:async' show Future;
 import 'package:flutter/services.dart' show rootBundle;
 import 'dart:convert';
 import 'package:flutter/services.dart';
-
-ProductData productData = ProductData();
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -29,7 +26,7 @@ class _HomePageState extends State<HomePage> {
   List<dynamic> productdata = [];
 
   Future<void> loadJsonData() async {
-    var jsonText = await rootBundle.loadString('images/data.json');
+    var jsonText = await rootBundle.loadString('asssets/data.json');
     setState(() {
       productdata = json.decode(jsonText);
     });
@@ -56,7 +53,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             Center(
               child: Image(
-                image: AssetImage('images/$itemNum.jpg'),
+                image: AssetImage('assets/$itemNum.jpg'),
                 width: 100.0,
                 height: 100.0,
               ),
