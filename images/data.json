@@ -1,4 +1,4 @@
-{
+[
     {
         "itemNum":0,
         "itemName": "Purepet",
@@ -74,4 +74,4 @@
         "itemName": "Meetup",
         "itemPrice": 634.60
     }
-}
+]

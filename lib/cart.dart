@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'dart:io';
+// import 'dart:io';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // ignore: must_be_immutable
@@ -13,16 +13,17 @@ class CartList extends StatefulWidget {
 }
 
 class _CartListState extends State<CartList> {
-  
-  Future<String> getProductName(int productImage) async {
+  final List<dynamic> _name = [];
+  Future<void> getProductName(int productImage) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    String? productName = preferences.getString('$productImage');
-    stdout.write('productName:$productName');
-    return productName.toString();
+    String productName = preferences.getString('$productImage') ?? "";
+    setState(() {
+      _name.insert(productImage, productName);
+    });
   }
 
   @override
-  Widget build(BuildContext context) {    
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -30,7 +31,11 @@ class _CartListState extends State<CartList> {
       ),
       body: cartProductList(),
       bottomNavigationBar: TextButton(
-        onPressed: () {},
+        onPressed: () {
+          setState(() {
+            widget.productData.clear();
+          });
+        },
         child: const Text(
           'Check Out',
           style: TextStyle(
@@ -45,21 +50,23 @@ class _CartListState extends State<CartList> {
   }
 
   Widget cartProductList() {
-    if(widget.productData.isEmpty){
-        return Center(
-          child: Column(
-            children: const [
-              Image(
-                image: AssetImage('images/empty5.png'),
-                height: 500.0,
-                width: 500.0,
-              ),
-              SizedBox(height: 10,),
-              Text('Cart is Empty'),
-            ],
-          ) 
-        );
-    }else{
+    if (widget.productData.isEmpty) {
+      return Center(
+        child: Column(
+          children: const [
+            Image(
+              image: AssetImage('images/empty5.png'),
+              height: 500.0,
+              width: 500.0,
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Text('Cart is Empty'),
+          ],
+        ),
+      );
+    } else {
       return ListView.builder(
         padding: const EdgeInsets.all(8.0),
         itemCount: widget.productData.length,
@@ -68,7 +75,7 @@ class _CartListState extends State<CartList> {
           // // List<int> content = [];
           // // content.add(1);
           int cartProductImage = widget.productData[index];
-          String cartProductName = getProductName(cartProductImage).toString();
+          getProductName(cartProductImage);
           // stdout.write(cartProductName);
           return Card(
             child: Row(
@@ -84,7 +91,7 @@ class _CartListState extends State<CartList> {
                   child: Column(
                     children: [
                       Text(
-                        cartProductName,
+                        _name[cartProductImage],
                         style: const TextStyle(
                           fontSize: 22.0,
                         ),
@@ -149,7 +156,6 @@ class _CartListState extends State<CartList> {
           );
         },
       );
-    
     }
   }
 }
