@@ -1,4 +1,6 @@
 // import 'dart:io';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:shopping/cart.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -21,12 +23,12 @@ class _HomePageState extends State<HomePage> {
     loadJsonData();
   }
 
-  List<int> data = [];
+  final List<int> _data = [];
 
   List<dynamic> productdata = [];
 
   Future<void> loadJsonData() async {
-    var jsonText = await rootBundle.loadString('asssets/data.json');
+    var jsonText = await rootBundle.loadString('assets/data.json');
     setState(() {
       productdata = json.decode(jsonText);
     });
@@ -76,14 +78,12 @@ class _HomePageState extends State<HomePage> {
                   SharedPreferences preferences =
                       await SharedPreferences.getInstance();
                   preferences.setString('$itemNum', name);
-
                   //SnackBar
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text('$name is added to cart')),
                   );
-
                   //send item num to data list
-                  data.add(itemNum);
+                  _data.add(itemNum);
                 },
                 child: const Text(
                   'add to Cart',
@@ -117,8 +117,9 @@ class _HomePageState extends State<HomePage> {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) {
+                  stderr.write(_data);
                   return CartList(
-                    productData: data,
+                    productData: _data,
                   );
                 }),
               );

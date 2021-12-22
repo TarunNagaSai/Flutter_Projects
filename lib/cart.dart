@@ -1,24 +1,24 @@
-import 'package:flutter/material.dart';
 // import 'dart:io';
+
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // ignore: must_be_immutable
 class CartList extends StatefulWidget {
   const CartList({Key? key, required this.productData}) : super(key: key);
   final List<int> productData;
-
-  // List<int> data = productData;
   @override
   _CartListState createState() => _CartListState();
 }
 
 class _CartListState extends State<CartList> {
-  final List<dynamic> _name = [];
+  final List<String> _name = [];
   Future<void> getProductName(int productImage) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     String productName = preferences.getString('$productImage') ?? "";
     setState(() {
       _name.insert(productImage, productName);
+      // stdout.write('name:$_name');
     });
   }
 
@@ -75,8 +75,8 @@ class _CartListState extends State<CartList> {
           // // List<int> content = [];
           // // content.add(1);
           int cartProductImage = widget.productData[index];
+          // stdout.write(cartProductImage);
           getProductName(cartProductImage);
-          // stdout.write(cartProductName);
           return Card(
             child: Row(
               children: [
