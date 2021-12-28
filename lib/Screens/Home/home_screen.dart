@@ -25,7 +25,7 @@ class _HomePageState extends State<HomePage> {
             ),
             onPressed: () {
               LoginServices.clearCredentials();
-              Navigator.pop(context);
+              Navigator.pushAndRemoveUntil;
             },
           ),
         ],

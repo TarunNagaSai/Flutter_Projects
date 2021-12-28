@@ -15,9 +15,8 @@ class LoginServices {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     if (preferences.containsKey(loginPreferencesKey)) {
       return true;
-    } else {
-      return false;
     }
+    return false;
   }
 
   static void clearCredentials() async {

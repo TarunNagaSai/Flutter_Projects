@@ -13,8 +13,9 @@ class SharedServices {
         var pro = productDataFromJson(prod);
         if (product.itemNum == pro.itemNum) {
           pro.quantity += 1;
-          productList.remove(prod);
-          productList.add(productDataToJson(pro));
+          var index = productList.indexOf(prod);
+          productList.removeAt(index);
+          productList.insert(index, productDataToJson(pro));
           return await preferences.setStringList(pList, productList);
         }
       }
@@ -46,10 +47,40 @@ class SharedServices {
     }
   }
 
-  // static List<ProductData> removeItem() {
-  //   List<ProductData> productData = [];
-  //   SharedPreferences preferences = await SharedPreferences.getInstance();
+  static void decreaseItem(ProductData product) async {
+    List<String> productList = [];
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    if (preferences.containsKey(pList)) {
+      productList = preferences.getStringList(pList) ?? [];
+      for (var prod in productList) {
+        var pro = productDataFromJson(prod);
+        if (product.itemNum == pro.itemNum) {
+          pro.quantity -= 1;
+          var index = productList.indexOf(prod);
+          productList.removeAt(index);
+          if (pro.quantity == 0) {
+            productList.remove(prod);
+          } else {
+            productList.insert(index, productDataToJson(pro));
+          }
+          await preferences.setStringList(pList, productList);
+        }
+      }
+    }
+  }
 
-  // }
-
+  static void deleteItem(ProductData product) async {
+    List<String> productList = [];
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    if (preferences.containsKey(pList)) {
+      productList = preferences.getStringList(pList) ?? [];
+      for (var prod in productList) {
+        var pro = productDataFromJson(prod);
+        if (product.itemNum == pro.itemNum) {
+          productList.remove(prod);
+          await preferences.setStringList(pList, productList);
+        }
+      }
+    }
+  }
 }

@@ -47,10 +47,8 @@ class CartProduct extends StatelessWidget {
                               size: 20.0,
                             ),
                             onPressed: () {
-                              // setState(() {
-                              //   // --content;
-                              //   // stdout.writeln(content[index]);
-                              // });
+                              SharedServices.decreaseItem(product);
+                              getProductIncerment();
                             },
                           ),
                           Text(
@@ -75,7 +73,10 @@ class CartProduct extends StatelessWidget {
                           Icons.delete_rounded,
                           size: 20.0,
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          SharedServices.deleteItem(product);
+                          getProductIncerment();
+                        },
                       ),
                     ),
                   ],
