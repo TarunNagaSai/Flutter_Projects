@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shopping/Helper/constant.dart';
+import 'package:shopping/Helper/routes.dart';
 import 'package:shopping/Screens/Cart/cart_screen.dart';
 import 'package:shopping/Services/login_services.dart';
 import 'package:shopping/Widgets/Home/product_card.dart';
@@ -25,7 +26,7 @@ class _HomePageState extends State<HomePage> {
             ),
             onPressed: () {
               LoginServices.clearCredentials();
-              Navigator.pushAndRemoveUntil;
+              Navigator.pushNamedAndRemoveUntil(context, Routes.login, (route) => false);
             },
           ),
         ],

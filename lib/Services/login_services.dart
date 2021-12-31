@@ -22,7 +22,7 @@ class LoginServices {
   static void clearCredentials() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     if (preferences.containsKey(loginPreferencesKey)) {
-    preferences.remove(loginPreferencesKey);
+      preferences.remove(loginPreferencesKey);
     }
   }
 }
